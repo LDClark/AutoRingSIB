@@ -26,8 +26,19 @@ namespace AutoRingSIB
                     {
                         if (course.CompletedDateTime == null) //course is active and can modify ss
                             canModifyStructureSet = true;
-                        else  //course is completed and cannot modify ss
-                            return false;
+                        else
+                        {
+                            canModifyStructureSet = false;
+                        }
+                        if (planSetup.IsDoseValid)  //dose is calculated and will not let you modify body or AssignedHU for structures
+                        {
+                            canModifyStructureSet = false;
+                        }
+
+                    }
+                    else
+                    {
+                        canModifyStructureSet = true; //no plans present
                     }
                 }
             }
